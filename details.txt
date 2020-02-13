@@ -1,0 +1,529 @@
+	# ALL ARRAY METHODS()
+	Ref: Array Methods
+---
+push(): insert into array
+pop(): extracts an item from the end
+shift() : extracts an item from the begining
+unshift():  adds items to the begining
+```
+var arr=[1,2,3];   
+console.log(arr);    //[ 1, 2, 3 ]
+arr.push(1);
+console.log(arr);    //[ 1, 2, 3, 1 ]
+arr.pop();
+console.log(arr);    //[ 1, 2, 3 ]
+arr.shift();
+console.log(arr);    //[ 2, 3 ]
+arr.unshift(5);     
+console.log(arr);    //[ 5, 2, 3 ]
+```
+As we know that arrays are also objects
+so we can also use delete; key word to delete an element;
+```
+var arr=[12,2,3,4];
+console.log(arr.length);   //4
+delete(arr[0]);
+console.log(arr[0]);       //undefined
+console.log(arr);          //[ <1 empty item>, 2, 3, 4 ]
+console.log(arr.length);   //4
+```
+length is same after deleting an element. That;s natural because delete obj.key removes by the key.
+
+splice():  method is a swiss army knife: that can do every thing insert/delete/remove/replace
+
+```
+let arr= ["hey", "ashu", "how", "are", "you?"];
+arr.splice(1,2);
+console.log(arr);   //[ 'hey', 'are', 'you?' ]
+```
+arr.splice(formWhereToStart,howManyElementsSplice, "replace them with these elements)
+```
+let arr= ["hey", "ashu", "how", "are", "you?"];
+arr.splice(1,2,"mohan","how");
+console.log(arr);
+```
+What  returns splice();
+```
+let arr= ["hey", "ashu", "how", "are", "you?"];
+console.log(arr);
+console.log(arr.splice(1,2));  // ["ashu" , "how"]
+```
+NOTE: slice() method is also able to add elements in array without any removal , just write
+```
+ arr.slice(startingIndex,0,"abc","xyz")
+```
+What about -minus indexes?
+```
+var arr= [1,2,3,4,5];
+arr.splice(-1,0,6);
+console.log(arr);
+```
+-1 indicates last element of array.
+.slice(-1,0,6) means it will start form last element and it is saying to delete 0 elements. and add 6 as the 2nd last index of an array.
+
+
+slice():    it is almost same as splice , only difference is it will return only copy of those elements which is asked to return.  (including asked index too)
+.slice(startIndex, lastIndex);  
+NOTE : This method never make changes in original array: 
+```
+let arr= [1,2,3,4,5,6,7,8,9];
+console.log(arr.slice(2,4));   //[ 3, 4 ]
+```
+One more Example:
+```
+let arr= [1,2,3,4,5,6,7,8,9]; 
+console.log(arr.slice(2,4));    //[ 3, 4 ]
+console.log(arr.slice(2));     //[3, 4, 5, 6, 7, 8, 9]
+console.log(arr.slice(-1));    //[ 9 ]
+console.log(arr.slice(-3));    //[ 7, 8, 9 ]
+console.log(arr.slice(-3,2));   //[]    
+```
+
+concat();     This method creates a new array that includes values from other arrays and additional items.
+
+Syntax is:
+```
+arr.concat(arg1, arg2...)
+```
+
+```
+let arr= [1,2,3,4,5,6];
+console.log(arr.concat(7,8,9));   //[1,2,3,4,5,6,7,8,9]
+```
+
+```
+let arr= [1,2,3,4,5,6];
+console.log(arr.concat([7,8,9]));
+console.log(arr.concat([7,8,9],[10,11,12]));   //[  1,  2, 3, 4,  5, 6,  7, 8, 9, 10,  11, 12]
+```
+it is same as
+```
+let arr= [1,2,3,4,5,6];
+let arr2= arr.concat([7,8,9]);
+console.log(arr.concat(arr2,10,11,12));   //[  1,  2, 3, 4,  5, 6,  7, 8, 9, 10,  11, 12]
+```
+In array Object also can be concatenated.
+```
+let arr= [1,2];
+let arrayLike={
+    0:"abc",
+    length:1
+};
+console.log(arr.concat(arrayLike));  // [1,2, {0:"abc, length:1}]
+```
+
+Take a Look for : 
+```
+[Symbol.isConcatSpreadable]   //property in objects when we want to use concat method of an array 
+```
+
+Iteration:  
+forEach():   arr.forEach() method allow to run a function for every element of the array.
+
+Syntax is: 
+```
+arr.foreach(function(item,index,array){
+//do what ever u want
+});
+```
+item:  item which is present at
+index:  index where item is present
+array: represent array (whole array)
+
+```
+let arr=['a','b','c','d','e','f','g'];
+arr.forEach(function(item,index){
+    console.log(index);
+    console.log(item);
+    
+    
+});     
+
+Output:
+0 a
+1 b
+2 c
+3 d
+4 e
+5 f
+6 g
+```
+if you write:
+```
+console.log(array)   // ['a','b','c','d','e','f','g']
+```
+We can also use arrow function: 
+```
+//forEach
+let arr=['a','b','c','d','e','f','g'];
+arr.forEach((item,index)=>{                        //here we r using arrow function instead of writing function keyword
+    console.log(index);
+    console.log(item);
+    
+    
+});    
+Output:
+0 a
+1 b
+2 c
+3 d
+4 e
+5 f
+6 g
+```
+This type of syntax is used to print variable :    [Just for knowledge]
+```
+console.log(`my name is ${name}`);    //here name is the variable 
+```
+
+Now Let's try to search something in array:
+ Here are three important methods which are going to help us in searching in array.
+.indexOf()     .lastIndexOf()    .includes() 
+
+Let's have a look about all functions and their return types:
+.indexOf()   :
+```
+arr.indexOf(item,from)      //synatax
+```
+item: is the item you are searching for
+from: you saying to array to start searching from there
+what return: it returns the index  if found otherwise  -1
+
+.lastIndexOf() 
+```
+arr.lastIndexOf(item,form)    //syntax
+```
+This method is same as indexOf() method the only difference is it start searching from the last index.
+
+.includes()  
+```
+arr.includes(item,from)  //syntax
+```
+it returns true if item is found false if not found.
+```
+let arr=["a", "b", "c", "d", "e" ,"f", "g", "h"]
+console.log(arr.indexOf("a",0));   //0
+console.log(arr.indexOf("b",6));   //-1    //notfound thats why it is returning -1 as per rules 
+console.log(arr.lastIndexOf("c"));  //2
+console.log(arr.includes("f"));     //true
+console.log(arr.includes("z"));     //false
+```
+
+Be clear when u get "false" in any array as an element
+```
+let arr=[1,0,false];
+console.log(arr.indexOf(0));   //1
+console.log(arr.indexOf(false));   //2     false is present (do not assume false is 0) array method is using === comparison
+console.log(arr.indexOf(null));    //-1     because null is not present
+```
+Note:  array method is using === comparison method
+
+And Be clear here too:
+When NaN is present in the array:
+```
+let arr=[NaN,1];
+console.log(arr.includes(NaN));   //true
+console.log(arr.indexOf(NaN));     //-1
+```
+why  console.log(arr.indexOf(NaN));   is giving -1  because === operator doesn't work for NaN
+---
+
+Now assume some scenario where Object is present inside an array: then how u search for key/value?
+```
+let arr=[
+    {id:1,name:"mahima"},
+    {id:2, name:"Santosh"},
+    {id:3, name:"Girish"},
+    "ashok",12,15
+]
+```
+Now How will you search for name?
+find() and findIndex() works here
+```
+let result= arr.find(function(item,index,array){
+    //do somthing
+});
+```
+if true , item  is returned in not undefined  will be returned 
+```
+let arr=[
+    {id:1,name:"mahima"},
+    {id:2, name:"Santosh"},
+    {id:3, name:"Girish"},
+    "ashok",12,15
+]
+let user= arr.find(function(item){
+    if(item.id==1)
+    return item.id;
+});
+console.log(user.name);    //mahima
+```
+One more example to understand
+```
+let arr=[
+    {id:1,name:"mahima"},
+    {id:2, name:"Santosh"},
+    {id:3, name:"Girish"},
+    "ashok",12,15
+]
+let user= arr.find(function(item){
+    if(item.name=="Girish")
+    return item.id;
+});
+console.log(user.id);    //3
+```
+
+  Just for knowledge Take a look of arrow functions:
+```
+//this is arrow function:
+
+let user = users.find(item => item.id == 1)
+
+//this is equivalent code for above line
+
+var user = users.find(function(item) {
+  return item.id == 1;
+});
+```
+The arr.findIndex() method is essentially the same, but it returns the index where the element was found instead of the element itself and -1 is returned when nothing is found.
+
+filter():  
+The find() method looks for a single (first) element in array and makes the function return true.
+if there are many elements in an array of objects or anything we can use filter()  which  returns an array of all matching elements.
+```
+let results = arr.filter(function(item, index, array) {
+  // if true item is pushed to results and the iteration continues
+  // returns empty array if nothing found
+});
+```
+item: item at iteration of array
+index: index of that element 
+array: whole array itself
+At every time when u get (true) matched it pushed to  results  and iteration will be continued..
+```
+let arr=[
+    {id:1,name:"mahima"},
+    {id:2, name:"Santosh"},
+    {id:3, name:"Girish"},
+    {id:4, name:"Ramesh"},
+    {id:5, name:"Divya"},
+    {id:6, name:"Daniel"},
+    {id:7, name:"Joseph"},
+    "ashok",12,15
+]
+let users= arr.filter(function(item){
+    if(item.id>3)
+    return item.id;
+}); 
+console.log(users);   
+ 
+OUTPUT:   //array of matched elements
+[
+  { id: 4, name: 'Ramesh' },
+  { id: 5, name: 'Divya' },
+  { id: 6, name: 'Daniel' },
+  { id: 7, name: 'Joseph' }
+]
+```
+
+```
+console.log(typeof users);   //object
+```
+ Let's understand same example in elements of array: (Simple way)
+```
+let arr=[1,2,3,4,5,6,7,7,8,8,9,0,0,0,1,3,3,3,4,22,22]
+let results= arr.filter(function(item){
+if(item>4)
+return item;
+})
+console.log(results);   
+
+Ouput:
+[ 5, 6, 7, 7, 8, 8, 9, 22, 22 ]   //returning items which are greater than 4
+```
+
+```
+console.log(results.length);   //9
+```
+
+TRANSFORMATION OF ARRAY : METHODS WHICH TRANSFORM AN ARRAY
+map(), sort(), reverse(), split() ,join(), reduce(), reduceRight(), isArray()
+
+map():  it calls the function for each element of the array and returns the array of result.
+Syntax:
+```
+let results= ["abc","defgh","ijklmn","op","q"].map(item=>item.length);
+output: /[3,5,6,2,1]
+```
+Experimented:
+```
+let arr= ["abc","defgh","ijklmn","op","q"];
+let results= arr.map(function(item){
+    return item.length;
+});
+console.log(results);   //[ 3, 5, 6, 2, 1 ]
+```
+
+sort(): changes the element order, it also returns the sorted array
+```
+let arr=[1,2,15];
+console.log(arr.sort());   // [1,15,2]    wrong
+```
+why output is not as expected:
+because "1" is compared first. 
+NOTE: The items are compared as string by default.
+We have to so this in order to get original sorted list:
+```
+var arr=[1,11,2,];
+function compareNumeric(a,b){
+    if(a>b) return 1;
+    if(a==b) return 0;
+    if(a<b) return -1;
+}
+arr.sort(compareNumeric)
+console.log(arr);
+```
+compareNumeric is made function   which should be passed inside sort() method.
+which is doing same as per the rules:
+compareNumeric  is called ordering Function.
+what is rule:
+```
+(method) Array<number>.sort(compareFn?: (a: number, b: number) => number): number[]
+Sorts an array.
+@param compareFn — Function used to determine the order of the elements. It is expected to return a negative value if first argument is less than second argument, zero if they're equal and a positive value otherwise. If omitted, the elements are sorted in ascending, ASCII character order.
+```
+ 
+This is also a way to make ordering function;
+```
+var arr=[1,15,2,];
+arr.sort(function(a,b) {return a-b;})
+console.log(arr);   // [1,2,15]
+```
+or do this:
+```
+var arr=[1,15,2,];
+arr.sort( (a, b) => a - b );  //same as above this is arrow function
+console.log(arr);   // [1,2,15]
+```
+
+If array consist only strings then there is no need to do all stuff related to ordering function.
+```
+var arr=["ram","shyam", "mohan", "aashu", "aasim"];
+arr.sort();
+console.log(arr);  //[ 'aashu', 'aasim', 'mohan', 'ram', 'shyam' ]
+```
+
+NOTE: There can be many letters like 
+```
+Österreich  // look at Ö which is not like a simple O
+```
+So to sort these types of strings this array method play very important role:
+.localeCompare ()
+```
+let countries = ['Österreich', 'Andorra', 'Vietnam'];
+
+alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (wrong)
+
+alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (correct!)
+```
+
+reverse() :  This method is used to reverse the array elements.
+```
+let arr= [1,2,3,4,5,6,8,9,0];
+console.log(arr.reverse());         //[ 0, 9, 8, 6, 5,  4, 3, 2, 1]
+```
+
+split():  Use this method in order to split string in to an array by giving some delimiter (delim)  which is already present there inside string.
+```
+var str= "ashu, mohan, vivek, dindayal";
+let arr= str.split(', ');
+console.log(arr);   //[ 'ashu', 'mohan', 'vivek', 'dindayal' ]
+```
+look at above example : str  is a string (single string ) having 4 words now if we want an array  having these elements in side that array, use split(delim) method, and  do further modification.
+arr is now an array of having all words as an element of that array;
+
+split()  has also an extra argument , which limits on the array length
+```
+var str= "ashu | mohan | vivek | dindayal";
+let arr= str.split('| ',3);
+console.log(arr);      //[ 'ashu ', 'mohan ', 'vivek ' ]
+```
+"dindayal" is ignored.
+
+Split in to letters:
+```
+let str= "HAPPY";
+console.log(str.split(""));    //[ 'H', 'A', 'P', 'P', 'Y' ]    //no space
+```
+
+```
+let str= "HAP PY";
+console.log(str.split(" "));  //  [ 'HAP', 'PY' ]       // space is given
+```
+ 
+join():  It does the reverse of split. it creates a string of arr items joined by glue between them.
+split()
+String to Array
+add delim
+join()
+Array to String
+remove glu
+
+```
+let   arr=[1,2,3,4,5,6];
+let str= arr.join('');
+console.log(str);    //123456
+console.log(typeof str);   //string
+```
+
+```
+let   arr=[1,2,3,4,5,6];
+let str= arr.join('| ');
+console.log(str);    //    1| 2| 3| 4| 5| 6
+console.log(typeof str);    //string
+```
+
+reduce():              Not able to understand yet on 13/feb/2020 Click at read
+When we want t iterate over an array we use:  forEach , for  or  for of
+when we want to iterate  and return the data for each element -we use map();
+reduce()  is used to calculate  a single value based on the array.
+Syntax:
+```
+let value = arr.reduce(function(accumulator, item, index, array) {
+  // ...
+}, [initial]);
+```
+- accumulator – is the result of the previous function call, equals initial the first time (if initial is provided).
+- item – is the current array item.
+- index – is its position.
+- array – is the array.
+```
+let arr = [1, 2, 3, 4, 5];
+
+let result = arr.reduce((sum, current) => sum + current, 0);
+
+alert(result); // 15
+```
+equivalent to
+```
+"use strict";
+
+var arr = [1, 2, 3, 4, 5];
+var result = arr.reduce(function(sum, current) {
+  return sum + current;
+}, 0);
+alert(result); // 15
+```
+
+Array.isArray():  Arrays do not from a seperate langauge type. they are based on objects.
+
+type of()    does not help to distinguish a plain object from an array.
+```
+console.log(Array.isArray({}));   //false
+console.log(Array.isArray([]));    //true
+```
+Array.isArray(value). It returns true if the value is an array, and false otherwise.
+
+Read This too if time:   "thisArg" Optional Parameter
+---
+Thank You Array: You are cute but methods made me confused. hehe Sorry. I will learn:
